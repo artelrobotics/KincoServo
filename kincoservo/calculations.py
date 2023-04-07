@@ -22,7 +22,7 @@ def registers_to_value(registers: list) -> int:
     Args:
         registers (list): The registers to convert.
     Returns:
-        int: The value.    
+        int: The value.
     """
     # convert the two Modbus registers to a sequence of 4 bytes in little-endian byte order
     data = struct.pack('<HH', *registers)
