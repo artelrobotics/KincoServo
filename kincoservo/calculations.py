@@ -31,6 +31,15 @@ def registers_to_value(registers: list) -> int:
     return value
 
 
+def rps_to_registers(value, scale_factor=163.840419):
+    """
+    Convert RPM to Modbus registers (2 bytes each)
+    """
+    # Multiply the input value by the scaling factor and convert to integer
+    scaled_value = int(value * scale_factor)
+
+    return value_to_registers(scaled_value)
+
 def rpm_to_registers(value, scale_factor=2730.665):
     """
     Convert RPM to Modbus registers (2 bytes each)

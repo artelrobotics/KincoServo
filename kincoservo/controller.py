@@ -3,14 +3,14 @@ import serial
 from time import perf_counter
 from .calculations import (rpm_to_registers, registers_to_rpm,
                            registers_to_value, value_to_registers,
-                           registers_to_radians, radians_to_registers)
+                           registers_to_radians, radians_to_registers, rps_to_registers)
 from .registers import ServoFD1X3 as Servo
 
 
 class ServoController:
 
     def __init__(self, port, address):
-        self.instrument = minimalmodbus.Instrument(port, address, debug=True)
+        self.instrument = minimalmodbus.Instrument(port, address, debug=False)
         self.instrument.serial.baudrate = 115200
         self.instrument.serial.parity = serial.PARITY_NONE
         self.instrument.serial.bytesize = 8
@@ -32,7 +32,13 @@ class ServoController:
     def set_profileacc(self, rpm):
         self.instrument.write_registers(
             Servo.ProfileAcceleration["Register"],
-            rpm_to_registers(rpm),
+            rps_to_registers(rpm),
+        )
+
+    def set_profiledec(self, rpm):
+        self.instrument.write_registers(
+            Servo.ProfileDeceleration["Register"],
+            rps_to_registers(rpm),
         )
 
     def set_velocitymode(self, direction='forward'):

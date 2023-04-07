@@ -39,6 +39,8 @@ class ServoFD1X3:
 
     ProfileAcceleration = { "R/W": "W", "Register": 0x4B00, "functioncode": 6}
 
+    ProfileDeceleration = { "R/W": "W", "Register": 0x4C00, "functioncode": 6}
+
     VelocityDirection = {
         "R/W": "W",
         "Register": 0x4700,
